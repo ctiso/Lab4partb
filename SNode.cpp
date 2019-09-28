@@ -13,20 +13,24 @@ using namespace std;
 
 
 SNode::SNode(){
+	int x;
 	cout<<"Please input your rating"<<endl;
-	cin >>rating;
+	cin >>x;
+	rating=x;
 	cout<<"Please input your comments"<<endl;
 	cin >>comments;
+	next=NULL;
 }
 SNode::SNode(int r, string c){
 	rating=r;
 	comments=c;
+	next=NULL;
 }
 
-/*SNode::~SNode(){
+SNode::~SNode(){
 	delete SNode();
 }
-*/
+
 void SNode::printNode(){
 	cout<<rating<<","<<comments<<endl;
 }
