@@ -28,7 +28,10 @@ SNode::SNode(int r, string c){
 }
 
 SNode::~SNode(){
-	delete SNode();
+	if(next != NULL){
+		cout<<"Deleting could cause a hole"<<endl;
+	}
+	delete next;
 }
 
 void SNode::printNode(){
