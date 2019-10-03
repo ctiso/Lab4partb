@@ -13,10 +13,9 @@ using namespace std;
 
 
 SNode::SNode(){
-	int x;
+	rating =0;
 	cout<<"Please input your rating"<<endl;
-	cin >>x;
-	rating=x;
+	cin >>rating;
 	cout<<"Please input your comments"<<endl;
 	cin >>comments;
 	next=NULL;
@@ -28,13 +27,12 @@ SNode::SNode(int r, string c){
 }
 
 SNode::~SNode(){
-	if(next != NULL){
-		cout<<"Deleting could cause a hole"<<endl;
-	}
-	delete next;
+	cout<<"deleting "<<rating<<", "<<comments<<endl;
+
+
 }
 
 void SNode::printNode(){
-	cout<<rating<<","<<comments<<endl;
+	cout<<"Rating: "<<rating<<", Comments: "<<comments<<endl;
 }
 

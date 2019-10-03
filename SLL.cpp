@@ -16,23 +16,16 @@ SLL::SLL(){
 	size=0;
 }
 SLL::~SLL(){
-	for(int i=0;i<size;i++){
-		SNode *temp=first;
-		first=temp->next;
-		delete temp;
-		size--;
-	}
-	size=0;
-	first=NULL;
-	last=NULL;
+	cout<<"deleted each node in 11"<<endl;
 }
 void SLL::printSLL(){
+	cout<<"\n";
 	SNode *tmp=first;
-	while(tmp !=NULL){
-		cout<<tmp->rating<<","<<tmp->comments<<":";
+	while(tmp->next !=NULL){
+		tmp->printNode();
 		tmp=tmp->next;
 	}
-	cout<<""<<endl;
+	tmp->printNode();
 }
 void SLL::push(int r, string c){
 	SNode *n=new SNode(r,c);
@@ -51,10 +44,10 @@ void SLL::addFirst(int r, string c){
 	SNode *n=new SNode(r,c);
 	first=n;
 	last=n;
-	size=1;
-	n->next=NULL;
+	size++;
 }
 int SLL::pop(){
+	cout<<"removing "<<last->rating<<", "<<last->comments<<endl;
 	SNode *n=last;
 	last=first;
 	while(last->next !=n){
@@ -63,41 +56,43 @@ int SLL::pop(){
 	last->next=NULL;
 	int rate=n->rating;
 	delete n;
-	return rate;
 	size--;
+	return rate;
 }
 double SLL::getAve(){
 	double sum=0;
 	SNode *n=first;
-	double count=0;
-	for(int i=0;i<size;i++){
+	while(n->next!=NULL){
 		sum+=n->rating;
-		count++;
 		n=n->next;
 	}
-	return sum/count;
+	sum+=n->rating;
+	return sum/10.0;
 }
 void SLL::insertInOrder(int r,string c){
+	bool temp=true;
 	if(size==0){
 		addFirst(r,c);
-		cout<<"4"<<endl;
-
 	}
-	if(first->rating > r){
+	else if(r<first->rating){
 		addAtFront(r,c);
-		cout<<"5"<<endl;
 	}
-	if(r >last->rating){
+	else if(r>last->rating){
 		push(r,c);
 	}
 	else{
-		SNode *n= new SNode(r,c);
-		SNode *tmp=first;
-		while(tmp->rating< n->rating){
-			tmp=tmp->next;
+		SNode *n=first;
+		if(r<n->next->rating){
+			temp=false;
 		}
-		n->next=tmp->next->next;
-		tmp->next=n;
-		size++;
+		while(temp){
+			n=n->next;
+			if(r<n->next->rating){
+				temp=false;
+			}
+		}
+		SNode *x=new SNode(r,c);
+		x->next=n->next;
+		n->next=x;
 	}
 }
